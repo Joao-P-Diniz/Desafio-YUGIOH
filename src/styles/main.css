@@ -112,3 +112,10 @@
     width: 8rem;
     border-radius: 6px;
 }
+
+.card{
+    transition:transform 0.2s;
+}
+.card:hover{
+    transform:scale(1.2);
+}

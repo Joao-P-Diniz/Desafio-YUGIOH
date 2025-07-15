@@ -18,8 +18,8 @@ const state = {
     }
 }
 const playerSides = {
-    player1: "player-field-card",
-    computer: "computer-field-card",
+    player1: "player-cards",
+    computer: "computer-cards",
 }
 
 const pathImages = "./src/assets/icons";
@@ -29,7 +29,7 @@ const cardData = [
         id:0,
         name: "Blue eyes white Dragon",
         type: "paper",
-        img: `${pathImages}dragon.png` ,
+        img: `./src/assets/icons/dragon.png` ,
         winOf: [1],
         loseOf: [2],
     },
@@ -37,15 +37,15 @@ const cardData = [
         id:1,
         name: "Dark Magician",
         type: "rock",
-        img: `${pathImages}magician.png` ,
+        img: `./src/assets/icons/magician.png` ,
         winOf: [2],
         loseOf: [0],
     },
     {
         id:2,
-        name: "Forbidden Exodia",
+        name: "Exodia the Forbidden One",
         type: "scissor",
-        img: `${pathImages}exodia.png` ,
+        img: `./src/assets/icons/exodia.png` ,
         winOf: [0],
         loseOf: [1],
     }
@@ -68,13 +68,21 @@ async function createCardImage(idCard, fieldSide) {
         cardImage.addEventListener("click", ()=>{
             setCardsField(cardImage.getAttribute("data-id"));
         });
+         cardImage.addEventListener("mouseover",()=>{
+        drawSelectCard(idCard);
+        });
     }
 
-    cardImage.addEventListener("mouseover",()=>{
-        drawSelectCard(idCard);
-    });
+   
 
     return cardImage;
+}
+
+async function drawSelectCard(index){
+    state.cardSprites.avatar.src = cardData[index].img;
+    state.cardSprites.name.innerText = cardData[index].name;
+    state.cardSprites.type.innerText ="Attribute: " + cardData[index].type;
+
 }
 
 async function drawCards(cardNumbers,fieldSide){
